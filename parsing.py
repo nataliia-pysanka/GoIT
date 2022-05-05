@@ -40,14 +40,14 @@ def pick_ext(file: Path):
     """
     ext = file.suffix[1:].upper()
     if not ext:
-        OTHERS.append(file.name)
+        OTHERS.append(file)
         return
     for item in EXT:
         if ext in item:
-            REGISTER_EXTENSIONS[item].append(file.name)
+            REGISTER_EXTENSIONS[item].append(file)
             KNOWN_EXT.append(ext)
             return
-    OTHERS.append(file.name)
+    OTHERS.append(file)
     UNKNOWN_EXT.append(ext)
     return
 
@@ -76,12 +76,42 @@ def print_lst():
     """
     Prints the lists with sorted files
     """
-    print(f'IMAGES: {IMAGES}')
-    print(f'VIDEO: {VIDEO}')
-    print(f'DOCUMENTS: {DOCUMENTS}')
-    print(f'AUDIO: {AUDIO}')
-    print(f'ARCHIVES: {ARCHIVES}')
-    print(f'OTHERS: {OTHERS}')
+    if IMAGES:
+        print('IMAGES:')
+        for image in IMAGES:
+            print(f'\t{image.name}')
 
-    print(f'Known extensions: {KNOWN_EXT}')
-    print(f'Unknown extensions: {UNKNOWN_EXT}')
+    if VIDEO:
+        print(f'VIDEO:')
+        for video in VIDEO:
+            print(f'\t{video.name}')
+
+    if DOCUMENTS:
+        print(f'DOCUMENTS:')
+        for doc in DOCUMENTS:
+            print(f'\t{doc.name}')
+
+    if AUDIO:
+        print(f'AUDIO:')
+        for audio in AUDIO:
+            print(f'\t{audio.name}')
+
+    if ARCHIVES:
+        print(f'ARCHIVES:')
+        for arch in ARCHIVES:
+            print(f'\t{arch.name}')
+
+    if OTHERS:
+        print(f'OTHERS:')
+        for other in OTHERS:
+            print(f'\t{other.name}')
+
+    if FOLDERS:
+        print(f'FOLDERS:')
+        for folder in FOLDERS:
+            print(f'\t{folder.name}')
+    print()
+    if KNOWN_EXT:
+        print(f'Known extensions: {" ".join(set(KNOWN_EXT))}')
+    if UNKNOWN_EXT:
+        print(f'Unknown extensions: {" ".join(set(UNKNOWN_EXT))}')

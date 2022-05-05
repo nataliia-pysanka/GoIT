@@ -39,17 +39,20 @@ def handle_folder(file_name: Path):
 def main(folder: Path):
     parser.scan_folder(folder)
     for file in parser.IMAGES:
-        handle_files(Path(folder / file), folder / 'images')
+        handle_files(file, folder / 'images')
     for file in parser.VIDEO:
-        handle_files(Path(folder / file), folder / 'video')
+        handle_files(file, folder / 'video')
     for file in parser.AUDIO:
-        handle_files(Path(folder / file), folder / 'audio')
+        handle_files(file, folder / 'audio')
     for file in parser.DOCUMENTS:
-        handle_files(Path(folder / file), folder / 'documents')
+        handle_files(file, folder / 'documents')
+    for file in parser.OTHERS:
+        handle_files(file, folder / 'others')
     for file in parser.ARCHIVES:
-        handle_archives(Path(folder / file), folder / 'archives')
+        handle_archives(file, folder / 'archives')
     for file in parser.FOLDERS:
-        handle_folder(Path(folder / file))
+        handle_folder(file)
+    parser.print_lst()
 
 
 if __name__ == '__main__':
